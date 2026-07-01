@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import { Navbar } from '../features/navigation';
 // import '../shared/styles/animations.css';
+import { Footer } from '../features/footer';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className="antialiased bg-[#fdfbf7]">
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
