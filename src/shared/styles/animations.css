@@ -1,0 +1,63 @@
+/* src/shared/styles/animations.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================================== */
+/* 1. Border Glow Animation */
+/* ==================================== */
+@keyframes border-glow-attract {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+/* ==================================== */
+/* 2. Button Press Animation */
+/* ==================================== */
+@keyframes button-press-minimal {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(0.99) translateY(1px);
+    background-color: #1e40af;
+  }
+}
+
+/* ==================================== */
+/* 3. Slide Down Animation */
+/* ==================================== */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==================================== */
+/* 4. Utility Classes */
+/* ==================================== */
+.animate-slideDown {
+  animation-name: slideDown;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+}
+
+.animate-border-glow {
+  animation: border-glow-attract 4s ease-in-out infinite alternate;
+}
+
+.animate-button-press {
+  animation: button-press-minimal 0.15s ease-out forwards;
+}

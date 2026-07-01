@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import HeroShowcase from '../features/landing/components/HeroShowcase';
 
 export default function Home() {

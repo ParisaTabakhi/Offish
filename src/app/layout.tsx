@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
-// import { byekan } from '../shared/lib/fonts';
+import { Navbar } from '../features/navigation';
+// import '../shared/styles/animations.css';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -15,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl" >
-      <body className="antialiased bg-[#fdfbf7]">{children}</body>
+      <body className="antialiased bg-[#fdfbf7]">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
