@@ -14,7 +14,7 @@ import { ROUTES } from '../../../shared/constants/routes';
 
 const BookingButton: React.FC = () => (
   <Link
-    href={ROUTES.BOOKING}
+    href='/booking'
     className="hidden md:flex bg-blue-600 text-white font-semibold px-6 py-2.5 items-center gap-1.5 rounded-md text-sm animate-border-glow hover:bg-blue-700 transition-all duration-300 ease-out hover:-translate-y-0.5 active:animate-button-press group"
     aria-label={NAV_CONFIG.ariaLabels.booking}
   >
