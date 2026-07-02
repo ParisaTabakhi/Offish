@@ -1,6 +1,6 @@
 // src/features/footer/types/footer.types.ts
 import { LucideIcon } from 'lucide-react';
-import { IconType } from 'react-icons'; // ✅ اضافه کردن نوع react-icons
+import { IconType } from 'react-icons'; 
 
 // ============================================
 // 1. BASE INTERFACES
@@ -20,7 +20,7 @@ export interface IBaseLink {
 // ============================================
 
 export interface ISocialLink extends IBaseLink {
-  icon: LucideIcon | IconType; // ✅ پشتیبانی از هر دو نوع
+  icon: LucideIcon | IconType; 
   ariaLabel: string;
 }
 
