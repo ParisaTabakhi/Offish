@@ -4,7 +4,7 @@
 import React, { useState, memo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Search, Sparkles } from 'lucide-react';
-import { EVENT_TYPES } from '../data/booking.data';
+import { EVENT_TYPES } from '../../data/booking.data';
 
 const Step1EventType: React.FC = () => {
   const {

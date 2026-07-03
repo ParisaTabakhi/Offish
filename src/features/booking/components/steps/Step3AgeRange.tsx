@@ -5,7 +5,7 @@ import React, { memo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { AGE_RANGES } from '../data/booking.data';
+import { AGE_RANGES } from '../../data/booking.data';
 
 const Step3AgeRange: React.FC = () => {
   const {

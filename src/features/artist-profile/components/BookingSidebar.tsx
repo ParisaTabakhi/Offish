@@ -2,6 +2,7 @@
 'use client';
 
 import React, { memo } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CalendarCheck, MessageSquare, Wallet, Clock4, Check, Zap } from 'lucide-react';
 import { useToast } from '../../../shared/hooks/use-toast';
@@ -9,12 +10,15 @@ import { IBookingSidebarProps } from '../types/artist-profile.types';
 
 const BookingSidebar: React.FC<IBookingSidebarProps> = ({ artist }) => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleBooking = () => {
-    toast({
-      title: '🚧 سیستم رزرو آنلاین',
-      description: 'این قابلیت به زودی فعال خواهد شد.',
+    const params = new URLSearchParams({
+      artistId: artist.id,
+      artistName: artist.name,
+      category: artist.category,
     });
+    router.push(`/booking?${params.toString()}`);
   };
 
   const handleMessage = () => {

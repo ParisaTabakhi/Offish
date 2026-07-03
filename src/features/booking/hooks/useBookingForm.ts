@@ -29,8 +29,8 @@ const bookingSchema = yup.object({
   address: yup.string().required('آدرس دقیق الزامی است'),
   eventDate: yup.string().required('تاریخ برگزاری الزامی است'),
   startTime: yup.string().required('ساعت شروع الزامی است'),
-  endTime: yup.string().nullable().default(''), // ✅ nullable با default
-  notes: yup.string().nullable().default(''), // ✅ nullable با default
+  endTime: yup.string().nullable().default(''),
+  notes: yup.string().nullable().default(''),
 });
 
 // ============================================
@@ -72,7 +72,7 @@ export function useBookingForm() {
   const { toast } = useToast();
 
   const form = useForm<IBookingFormData>({
-    resolver: yupResolver(bookingSchema) as any, // ✅ اضافه کردن as any
+    resolver: yupResolver(bookingSchema) as any,
     mode: 'onChange',
     defaultValues: {
       eventType: '',
@@ -152,5 +152,6 @@ export function useBookingForm() {
     STEP_TITLES,
     STEP_SUBTITLES,
     TOTAL_STEPS: 6,
+    setValue: form.setValue,
   };
 }

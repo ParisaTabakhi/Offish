@@ -66,8 +66,8 @@ export interface IBookingFormData {
   address: string;
   eventDate: string;
   startTime: string;
-  endTime?: string; // ✅ optional
-  notes?: string; // ✅ optional
+  endTime?: string;
+  notes?: string;
 }
 
 // ============================================
@@ -93,4 +93,12 @@ export interface IProgressBarProps {
 export interface IStepProps {
   onNext?: () => void;
   onPrevious?: () => void;
+}
+
+// ============================================
+// 8. CATEGORY MAP
+// ============================================
+
+export interface ICategoryMap {
+  [key: string]: string;
 }

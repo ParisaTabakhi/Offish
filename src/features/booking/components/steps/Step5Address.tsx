@@ -4,7 +4,7 @@
 import React, { memo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { MapPin, ChevronDown } from 'lucide-react';
-import { CITIES, DISTRICTS } from '../data/booking.data';
+import { CITIES, DISTRICTS } from '../../data/booking.data';
 
 const Step5Address: React.FC = () => {
   const {

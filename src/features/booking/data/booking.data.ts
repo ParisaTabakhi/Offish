@@ -1,5 +1,5 @@
 // src/features/booking/data/booking.data.ts
-import { IEventType, IArtistCategory, IAgeRange, ICity, IDistricts } from '../types/booking.types';
+import { IEventType, IArtistCategory, IAgeRange, ICity, IDistricts, ICategoryMap } from '../types/booking.types';
 
 export const EVENT_TYPES: IEventType[] = [
   { value: 'birthday', label: 'جشن تولد', icon: '🎂', description: 'جشن تولد کودک یا بزرگسال' },
@@ -52,6 +52,27 @@ export const ARTIST_CATEGORIES: IArtistCategory[] = [
     ],
   },
 ];
+
+// ============================================
+// ✅ MAP: Artist Category Name → Form Category Value
+// ============================================
+
+export const ARTIST_TO_FORM_CATEGORY_MAP: ICategoryMap = {
+  Singer: 'music',
+  Musician: 'music',
+  Photographer: 'services',
+  Actor: 'performance',
+};
+
+// ============================================
+// ✅ MAP: Form Category Value → Display Label
+// ============================================
+
+export const FORM_CATEGORY_LABELS: ICategoryMap = {
+  music: 'موسیقی',
+  performance: 'هنرهای نمایشی',
+  services: 'خدمات مجالس',
+};
 
 export const AGE_RANGES: IAgeRange[] = [
   { value: 'kids', label: 'کودکان', range: '3-12 سال', icon: '👶' },
