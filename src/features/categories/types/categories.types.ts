@@ -113,3 +113,25 @@ export interface IFilterDropdownProps {
   onToggle: () => void;
   active?: boolean;
 }
+
+export interface IArtistCardData {
+  id: number | string;
+  name: string;
+  category?: string;
+  specialty?: string;
+  price: string;
+  description?: string;
+  bio?: string;
+  projects?: number;
+  rating: number;
+  city: string;
+  location?: string;
+  isVerified?: boolean;
+  verified?: boolean;
+  image?: string;
+  profileImage?: string;
+  cover?: string;
+  coverImage?: string;
+  tags?: string[];
+  experience?: string;
+}

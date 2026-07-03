@@ -30,7 +30,7 @@ const BookingButton: React.FC = () => (
 
 const AuthButton: React.FC = () => (
   <Link
-    href={ROUTES.AUTH}
+    href="/auth/role"
     className="hidden md:flex text-blue-600 font-semibold px-4 py-2.5 items-center gap-1.5 rounded-md text-sm bg-blue-50/50 border-2 border-blue-100 hover:bg-blue-50 transition-all duration-200 active:scale-[0.98]"
     aria-label={NAV_CONFIG.ariaLabels.auth}
   >

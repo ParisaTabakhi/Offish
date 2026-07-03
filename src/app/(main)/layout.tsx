@@ -1,7 +1,8 @@
+// src/app/layout.tsx
 import type { Metadata } from 'next';
 import { Navbar } from '../../features/navigation';
+// import '../shared/styles/animations.css';
 import { Footer } from '../../features/footer';
-import '../../shared/styles/animations.css';
 import '../globals.css';
 
 export const metadata: Metadata = {
@@ -9,16 +10,16 @@ export const metadata: Metadata = {
   description: 'پلتفرم تخصصی خدمات رویداد و هنرمندان',
 };
 
-export default function MainLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="fa" dir="rtl" >
       <body className="antialiased bg-[#fdfbf7]">
         <Navbar />
-        <main>{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
