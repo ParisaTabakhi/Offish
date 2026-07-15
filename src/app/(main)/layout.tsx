@@ -1,27 +1,16 @@
-// src/app/layout.tsx
-import type { Metadata } from 'next';
-import { Navbar } from '../../features/navigation';
-// import '../shared/styles/animations.css';
-import { Footer } from '../../features/footer';
-import '../globals.css';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'هنرمندان | مرجع تخصصی هنرمندان کشور',
-  description: 'پلتفرم تخصصی خدمات رویداد و هنرمندان',
-};
+import MainLayout from '../../features/dashboard/components/layout/MainLayout';
+import { ARTIST_SIDEBAR_SECTIONS } from '../../features/dashboard/config/sidebar.config';
 
-export default function RootLayout({
+export default function MainLayoutWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl" >
-      <body className="antialiased bg-[#fdfbf7]">
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <MainLayout sidebarSections={ARTIST_SIDEBAR_SECTIONS} showSidebar={true}>
+      {children}
+    </MainLayout>
   );
 }

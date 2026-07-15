@@ -1,0 +1,11 @@
+export { default as ProfilePage } from './components/ProfilePage';
+export { default as ProfileHeader } from './components/ProfileHeader';
+export { default as ProfileStats } from './components/ProfileStats';
+export { default as ProfileBio } from './components/ProfileBio';
+export { default as ProfileContact } from './components/ProfileContact';
+export { default as ProfileActivity } from './components/ProfileActivity';
+export { default as ProfileSkeleton } from './components/ProfileSkeleton';
+export  * from './hooks/useProfileEdit';
+export * from './types/profile.types';
+export * from './hooks/useProfileData';
+export * from './data/mock-profile-data';

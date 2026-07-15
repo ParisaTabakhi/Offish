@@ -54,7 +54,7 @@ const HeroShowcase: React.FC = memo(() => {
     <div className="relative min-h-[90vh] bg-[#fdfbf7] overflow-hidden flex items-center py-12 lg:py-0">
       <BackgroundBlobs />
 
-      <div className="w-full mx-[10%] p-4 h-full relative z-10">
+      <div className="w-full mx-[4%] p-4 h-full relative z-10">
         <div className="flex flex-col lg:flex-row h-full gap-8 lg:gap-16 items-start">
           
           {/* Right Side - Content */}
