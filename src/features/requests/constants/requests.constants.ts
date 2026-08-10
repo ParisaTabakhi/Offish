@@ -72,7 +72,7 @@ export const REQUEST_LABELS = {
       rejected: 'رد شده',
       completed: 'تکمیل شده',
     },
-    otherParty: 'پلنر',
+    otherParty: 'برگزار کننده',
   },
   planner: {
     title: 'درخواست‌های ارسال‌شده',

@@ -20,9 +20,13 @@ export interface IBaseMenuItem {
 // 2. NAVIGATION ITEMS
 // ============================================
 
-export interface INavItem extends IBaseMenuItem {
+
+export interface INavItem {
   isActive?: boolean;
   onClick?: () => void;
+  label: string;
+  href: string;
+  icon?: LucideIcon;
 }
 
 export interface INavItemProps {
@@ -65,4 +69,19 @@ export interface IDesktopNavProps {
 export interface INavActionsProps {
   onMenuToggle: () => void;
   isMobileMenuOpen: boolean;
+}
+
+
+
+export interface INavActionsProps {
+  onMenuToggle: () => void;
+  isMobileMenuOpen: boolean;
+}
+
+export interface INavbarProps {
+  onMenuClick?: () => void;
+}
+
+export interface IDashboardButtonProps {
+  role?: 'artist' | 'employer';
 }

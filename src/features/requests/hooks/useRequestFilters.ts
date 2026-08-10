@@ -10,6 +10,13 @@ export const useRequestFilters = (requests: IRequest[]) => {
     sortBy: 'newest',
   });
 
+  const formatBudgetString = (budget: { min: number; max: number }): string => {
+    if (budget.min === budget.max) {
+      return `${budget.min.toLocaleString()} تومان`;
+    }
+    return `${budget.min.toLocaleString()} - ${budget.max.toLocaleString()} تومان`;
+  };
+
   const filteredRequests = useMemo(() => {
     let result = [...requests];
 
@@ -35,15 +42,16 @@ export const useRequestFilters = (requests: IRequest[]) => {
         result.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
         break;
       case 'budget-high':
-        result.sort((a, b) => b.budget - a.budget);
+        result.sort((a, b) => b.budget.max - a.budget.max);
         break;
       case 'budget-low':
-        result.sort((a, b) => a.budget - b.budget);
+        result.sort((a, b) => a.budget.min - b.budget.min);
         break;
     }
 
     return result;
   }, [requests, filters]);
+
 
   const tableData = useMemo((): IRequestTableRow[] => {
     return filteredRequests.map((req) => ({
@@ -52,9 +60,15 @@ export const useRequestFilters = (requests: IRequest[]) => {
       client: req.client?.name || 'نامشخص',
       artist: req.artist?.name || 'نامشخص',
       status: req.status,
-      budget: `${req.budget.toLocaleString()} ${req.currency}`,
+      budget: formatBudgetString(req.budget), 
+      budgetMin: req.budget.min,
+      budgetMax: req.budget.max,
       date: new Date(req.createdAt).toLocaleDateString('fa-IR'),
       category: req.category,
+      detail: req.detail,
+      description: req.description,
+      currency: req.currency,
+      createdAt: req.createdAt,
     }));
   }, [filteredRequests]);
 

@@ -24,7 +24,10 @@ export interface IRequest {
   status: RequestStatus;
   createdAt: string;
   updatedAt: string;
-  budget: number;
+  budget: {
+    min: number;
+    max: number;
+  };
   currency: string;
   category: string;
   client?: {
@@ -37,9 +40,8 @@ export interface IRequest {
     name: string;
     avatar?: string;
   };
-  projectId?: string;
+  detail?: IRequestDetail;
   messages?: number;
-  attachments?: number;
   dueDate?: string;
 }
 
@@ -53,9 +55,15 @@ export interface IRequestTableRow {
   client: string;
   artist: string;
   status: RequestStatus;
-  budget: string;
+  budget: string; 
+  budgetMin?: number; 
+  budgetMax?: number; 
   date: string;
   category: string;
+  detail?: IRequestDetail;
+  description?: string;
+  currency?: string;
+  createdAt?: string;
 }
 
 // ============================================
@@ -142,4 +150,19 @@ export interface IRequestEmptyStateProps {
   role: 'artist' | 'planner';
   filterApplied: boolean;
   onResetFilters: () => void;
+}
+
+export interface IRequestDetail {
+  eventType?: string;
+  guestsCount?: number;
+  ageRanges?: string[];
+  address?: string;
+  city?: string;
+  district?: string;
+  startTime?: string;
+  endTime?: string;
+  eventDate?: string;
+  notes?: string;
+  offeredPrice?: number;
+  customFields?: Record<string, any>;
 }

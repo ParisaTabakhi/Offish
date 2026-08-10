@@ -1,6 +1,6 @@
-// src/features/categories/types/categories.types.ts
 import { LucideIcon } from 'lucide-react';
-import { IconType } from 'react-icons'; 
+import { IconType } from 'react-icons';
+import { ISubCategory } from '../../../shared/services/category/category.types';
 
 // ============================================
 // 1. ARTIST
@@ -21,28 +21,19 @@ export interface IArtist {
 }
 
 // ============================================
-// 2. SUBCATEGORY
+// 2. SIDEBAR CATEGORY ITEM
 // ============================================
 
-export interface ISubcategory {
-  name: string;
-  description: string;
-  artists: IArtist[];
-}
-
-// ============================================
-// 3. CATEGORY
-// ============================================
-
-export interface ICategory {
+export interface ICategorySidebarItem {
+  id: string;
   name: string;
   count: number;
   description: string;
-  subcategories: ISubcategory[];
+  subcategories: ISubCategory[];
 }
 
 // ============================================
-// 4. FILTER STATE
+// 3. FILTER STATE
 // ============================================
 
 export interface IFilterState {
@@ -53,7 +44,7 @@ export interface IFilterState {
 }
 
 // ============================================
-// 5. COMPONENT PROPS
+// 4. COMPONENT PROPS
 // ============================================
 
 export interface IArtistCardProps {
@@ -62,23 +53,23 @@ export interface IArtistCardProps {
 }
 
 export interface ICategoriesSidebarProps {
-  categories: ICategory[];
-  selectedCategory: string;
-  onCategorySelect: (categoryName: string) => void;
+  categories: ICategorySidebarItem[];
+  selectedCategoryId: string;
+  onCategorySelect: (categoryId: string) => void;
   isOpen: boolean;
   onClose: () => void;
 }
 
 export interface ICategoriesHeaderProps {
-  category: ICategory | undefined;
+  category: ICategorySidebarItem | undefined;
   icon: LucideIcon | IconType;
   label: string;
 }
 
 export interface ISubcategoryTabsProps {
-  subcategories: ISubcategory[];
-  selectedSubcategory: string;
-  onSubcategorySelect: (name: string) => void;
+  subcategories: ISubCategory[];
+  selectedSubcategoryId: string;
+  onSubcategorySelect: (id: string) => void;
 }
 
 export interface IFilterBarProps {
@@ -95,7 +86,7 @@ export interface IArtistGridProps {
 }
 
 // ============================================
-// 6. FILTER DROPDOWN
+// 5. FILTER DROPDOWN
 // ============================================
 
 export interface IFilterDropdownOption {

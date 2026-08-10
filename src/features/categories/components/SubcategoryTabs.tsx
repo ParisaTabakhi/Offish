@@ -8,17 +8,17 @@ import { ISubcategoryTabsProps } from '../types/categories.types';
 
 const SubcategoryTabs: React.FC<ISubcategoryTabsProps> = ({
   subcategories,
-  selectedSubcategory,
+  selectedSubcategoryId,
   onSubcategorySelect,
 }) => {
   return (
     <div className="flex overflow-x-auto pb-4 gap-3 no-scrollbar mask-gradient-x">
       {subcategories.map((sub) => {
-        const isActive = selectedSubcategory === sub.name;
+        const isActive = selectedSubcategoryId === sub.id;
         return (
           <button
-            key={sub.name}
-            onClick={() => onSubcategorySelect(sub.name)}
+            key={sub.id}
+            onClick={() => onSubcategorySelect(sub.id)}
             className={cn(
               "flex items-center gap-2 px-5 py-3 rounded-xl whitespace-nowrap transition-all duration-300 border font-medium text-sm",
               isActive
@@ -27,14 +27,14 @@ const SubcategoryTabs: React.FC<ISubcategoryTabsProps> = ({
             )}
           >
             {isActive && <Sparkles className="w-4 h-4 text-orange-400 animate-pulse" />}
-            <span>{sub.name}</span>
+            <span>{sub.title}</span>
             <span
               className={cn(
                 "mr-2 text-xs py-0.5 px-2 rounded-md",
                 isActive ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-500"
               )}
             >
-              {sub.artists.length}
+              {sub.artistCount ?? 0}
             </span>
           </button>
         );

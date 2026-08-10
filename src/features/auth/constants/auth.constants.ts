@@ -22,7 +22,7 @@ export const ROLES: IRole[] = [
     title: 'هنرمند هستم',
     description: 'می‌خواهم مهارت‌های خود را به نمایش بگذارم و از هنر خود کسب درآمد کنم.',
     icon: Palette,
-    color: '#f97316', // ✅ نارنجی
+    color: '#f97316', 
     bgColor: 'bg-orange-50',
     features: ['ساخت پورتفولیو حرفه‌ای', 'دریافت پروژه‌های اختصاصی', 'تضمین پرداخت امن'],
     route: 'artist',
@@ -30,18 +30,18 @@ export const ROLES: IRole[] = [
 ];
 
 // ============================================
-// 2. THEMES - با رنگ‌های صحیح
+// 2. THEMES - 
 // ============================================
 
 export const AUTH_THEMES: Record<string, IAuthTheme> = {
   employer: {
-    color: '#2745d1', // ✅ آبی
+    color: '#2745d1', 
     bgGradient: 'bg-gradient-to-br from-[#2745d1] to-blue-600',
     subtleBg: 'bg-blue-50',
     ringFocus: 'focus-visible:ring-[#2745d1]',
   },
   artist: {
-    color: '#f97316', // ✅ نارنجی
+    color: '#f97316', 
     bgGradient: 'bg-gradient-to-br from-orange-500 to-amber-500',
     subtleBg: 'bg-orange-50',
     ringFocus: 'focus-visible:ring-orange-500',
@@ -49,11 +49,11 @@ export const AUTH_THEMES: Record<string, IAuthTheme> = {
 };
 
 // ============================================
-// 3. تابع کمکی برای دریافت تم
+// 3.get theme function
 // ============================================
 
 export const getAuthTheme = (role: string): IAuthTheme => {
-  // ✅ بررسی دقیق role
+  
   if (role === 'artist') {
     return AUTH_THEMES.artist;
   }

@@ -103,9 +103,9 @@ const BookingPage: React.FC = () => {
   );
 
   return (
-    <div className="h-[100dvh] w-full overflow-hidden flex bg-white">
+    <div className=" w-full overflow-hidden flex bg-white">
       {/* Left Side - Form Area */}
-      <div className="w-full lg:w-1/2 h-full flex flex-col">
+      <div className="w-full lg:w-1/2  flex flex-col">
         <BookingHeader artistName={preSelectedArtist?.name} />
 
         <div className="flex-1 min-h-0 flex flex-col px-6 md:px-8 py-4 max-w-2xl mx-auto w-full">

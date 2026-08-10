@@ -4,8 +4,9 @@ import { ROUTES } from '../../../shared/constants/routes';
 
 export const NAV_ITEMS: INavItem[] = [
   { label: 'خانه', href: ROUTES.HOME },
-  { label: 'دسته‌بندی‌ها', href: ROUTES.CATEGORY },
-  { label: 'هنرمندان', href: ROUTES.ARTISTS },
+  { label: 'هنرمندان', href: ROUTES.CATEGORY },
+  { label: 'قوانین و مقررات', href: ROUTES.CONTACT},
+  { label: 'راهنما', href: ROUTES.CONTACT },
   { label: 'درباره ما', href: ROUTES.ABOUT },
   { label: 'تماس با ما', href: ROUTES.CONTACT },
 ];

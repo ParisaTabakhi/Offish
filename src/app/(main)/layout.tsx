@@ -1,16 +1,18 @@
 'use client';
 
-import MainLayout from '../../features/dashboard/components/layout/MainLayout';
-import { ARTIST_SIDEBAR_SECTIONS } from '../../features/dashboard/config/sidebar.config';
+import { Navbar } from '../../features/navigation';
+import { Footer } from '../../features/footer';
 
-export default function MainLayoutWrapper({
+export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <MainLayout sidebarSections={ARTIST_SIDEBAR_SECTIONS} showSidebar={true}>
-      {children}
-    </MainLayout>
+    <div className="min-h-screen bg-[#fdfbf7] flex flex-col">
+      <Navbar />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
   );
 }

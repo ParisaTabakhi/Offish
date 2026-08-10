@@ -34,18 +34,18 @@ const RequestsTable: React.FC<IRequestsTableProps> = ({
   return (
     <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
       {/* Header */}
-      <div className="grid grid-cols-12 items-center gap-3 px-8 py-3 bg-slate-50 border-b border-slate-200">
-        <div className="col-span-3 flex items-center gap-1">
+      <div className="grid grid-cols-12 items-center gap-3 px-6 py-3 bg-slate-50 border-b border-slate-200">
+        <div className="col-span-2 flex items-center gap-1">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">عنوان</span>
           <ArrowUpDown className="w-3 h-3 text-slate-400" />
         </div>
         <div className="col-span-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
           {labels.otherParty}
         </div>
-        <div className="col-span-2 text-xs font-bold text-slate-500 uppercase tracking-wider">بودجه</div>
+        <div className="col-span-3 text-xs font-bold text-slate-500 uppercase tracking-wider text-center ml-8">بودجه</div>
         <div className="col-span-2 text-xs font-bold text-slate-500 uppercase tracking-wider">تاریخ</div>
         <div className="col-span-1 text-xs font-bold text-slate-500 uppercase tracking-wider">وضعیت</div>
-        <div className="col-span-2 text-xs font-bold text-slate-500 uppercase tracking-wider text-left ml-8">عملیات</div>
+        <div className="col-span-2 text-xs font-bold text-slate-500 uppercase tracking-wider text-left">عملیات</div>
       </div>
 
       {/* Body */}

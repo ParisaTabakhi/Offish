@@ -29,7 +29,7 @@ export const ARTIST_SIDEBAR_SECTIONS: ISidebarSection[] = [
       {
         id: 'requests',
         label: 'درخواست‌ها',
-        href: '/artist/requests',
+        href: '/dashboard/artist/requests',
         icon: Inbox,
         badge: 5,
       },
@@ -97,7 +97,7 @@ export const EMPLOYER_SIDEBAR_SECTIONS: ISidebarSection[] = [
       {
         id: 'requests',
         label: 'درخواست‌های من',
-        href: '/employer/requests',
+        href: 'dashboard/planner/requests',
         icon: Inbox,
       },
       {

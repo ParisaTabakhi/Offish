@@ -1,81 +1,59 @@
-// src/features/categories/components/CategoriesPage.tsx
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { Menu } from 'lucide-react';
-import { mockData } from '../data/categories.data';
-import { useCategoryFilters } from '../hooks/useCategoryFilters';
+import React, { useMemo, useState } from 'react';
+import { Menu, Sparkles } from 'lucide-react';
+import { useCategories } from '../../../shared/hooks/queries';
+import { useArtistsBySubcategory } from '../../../shared/hooks/queries/useArtists';
+import { ISubCategory } from '../../../shared/services/category/category.types';
+import { useCategorySelection } from '../hooks/useCategorySelection';
+import { toCategorySidebarItem } from '../utils/categoryMappers';
+import {
+  PageLoadingState,
+  PageErrorState,
+  PageEmptyState,
+} from './CategoryPageStates';
 import CategoriesSidebar from './CategoriesSidebar';
 import CategoriesHeader from './CategoriesHeader';
 import SubcategoryTabs from './SubcategoryTabs';
-import FilterBar from './FilterBar';
 import ArtistGrid from './ArtistGrid';
 
-// Category Icons mapping
-const categoryIcons: Record<string, any> = {
-  Singer: require('lucide-react').Mic,
-  Musician: require('lucide-react').Music,
-  Photographer: require('lucide-react').Camera,
-  Actor: require('lucide-react').Drama,
-};
-
-const categoryLabels: Record<string, string> = {
-  Singer: 'خواننده',
-  Musician: 'نوازنده',
-  Photographer: 'عکاس',
-  Actor: 'بازیگر',
-};
+const EMPTY_SUBCATEGORIES: ISubCategory[] = [];
 
 const CategoriesPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState(mockData[0].name);
-  const [selectedSubcategory, setSelectedSubcategory] = useState(
-    mockData[0].subcategories[0].name
-  );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Get current category and subcategory data
-  const currentCategory = useMemo(
-    () => mockData.find((c) => c.name === selectedCategory),
-    [selectedCategory]
+  const { data: categories, isLoading, isError, refetch } = useCategories();
+
+  const {
+    selectedCategory,
+    selectedCategoryId,
+    setSelectedCategoryId,
+    selectedSubcategoryId,
+    setSelectedSubcategoryId,
+  } = useCategorySelection(categories);
+
+  const {
+    data: artists,
+    isLoading: isLoadingArtists,
+    isError: isErrorArtists,
+  } = useArtistsBySubcategory(selectedSubcategoryId);
+
+  const sidebarCategories = useMemo(
+    () => (categories ?? []).map(toCategorySidebarItem),
+    [categories]
   );
 
-  const currentSubcategory = useMemo(() => {
-    return currentCategory?.subcategories.find(
-      (s) => s.name === selectedSubcategory
-    );
-  }, [currentCategory, selectedSubcategory]);
+  const subCategories = selectedCategory?.subCategories ?? EMPTY_SUBCATEGORIES;
 
-  const artists = currentSubcategory?.artists || [];
-
-  // Use filter hook
-  const {
-    filters,
-    updateFilter,
-    resetFilters,
-    cities,
-    filteredArtists,
-    activeFiltersCount,
-  } = useCategoryFilters(artists);
-
-  // Update subcategory when category changes
-  useEffect(() => {
-    if (currentCategory && currentCategory.subcategories.length > 0) {
-      setSelectedSubcategory(currentCategory.subcategories[0].name);
-      resetFilters();
-    }
-  }, [selectedCategory, currentCategory, resetFilters]);
-
-  const handleCategorySelect = (categoryName: string) => {
-    setSelectedCategory(categoryName);
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategoryId(categoryId);
   };
 
-  const handleSubcategorySelect = (subName: string) => {
-    setSelectedSubcategory(subName);
-    resetFilters();
-  };
+  const label = selectedCategory?.title ?? 'دسته‌بندی';
 
-  const Icon = categoryIcons[selectedCategory];
-  const label = categoryLabels[selectedCategory] || selectedCategory;
+  if (isLoading) return <PageLoadingState />;
+  if (isError) return <PageErrorState onRetry={() => refetch()} />;
+  if (!categories || categories.length === 0) return <PageEmptyState />;
 
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
@@ -90,46 +68,56 @@ const CategoriesPage: React.FC = () => {
       </div>
 
       <div className="flex min-h-screen">
-        {/* Sidebar */}
         <CategoriesSidebar
-          categories={mockData}
-          selectedCategory={selectedCategory}
+          categories={sidebarCategories}
+          selectedCategoryId={selectedCategoryId || ''}
           onCategorySelect={handleCategorySelect}
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
 
-        {/* Main Content */}
         <main className="flex-1 min-w-0 bg-gray-50/50">
           <div className="p-6 lg:p-10 max-w-7xl mx-auto">
-            {/* Header */}
             <CategoriesHeader
-              category={currentCategory}
-              icon={Icon}
+              category={
+                selectedCategory ? toCategorySidebarItem(selectedCategory) : undefined
+              }
+              icon={Sparkles}
               label={label}
             />
 
             <div className="space-y-6">
-              {/* Subcategory Tabs */}
-              {currentCategory && (
-                <SubcategoryTabs
-                  subcategories={currentCategory.subcategories}
-                  selectedSubcategory={selectedSubcategory}
-                  onSubcategorySelect={handleSubcategorySelect}
-                />
+              {selectedCategory?.description && (
+                <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+                  <p className="text-sm text-slate-600">
+                    {selectedCategory.description}
+                  </p>
+                </div>
               )}
 
-              {/* Filter Bar */}
-              <FilterBar
-                filters={filters}
-                onFilterChange={updateFilter}
-                onReset={resetFilters}
-                cities={cities}
-                activeFiltersCount={activeFiltersCount}
+              {subCategories.length > 0 ? (
+                <SubcategoryTabs
+                  subcategories={subCategories}
+                  selectedSubcategoryId={selectedSubcategoryId || ''}
+                  onSubcategorySelect={setSelectedSubcategoryId}
+                />
+              ) : (
+                <p className="text-slate-500 text-sm">
+                  زیردسته‌ای برای این دسته‌بندی ثبت نشده است.
+                </p>
+              )}
+
+              {/* نمایش هنرمندان */}
+              <ArtistGrid
+                artists={artists || []}
+                isLoading={isLoadingArtists}
               />
 
-              {/* Artists Grid */}
-              <ArtistGrid artists={filteredArtists} />
+              {isErrorArtists && !isLoadingArtists && (
+                <div className="text-center text-red-500 text-sm">
+                  خطا در دریافت هنرمندان. لطفاً مجدداً تلاش کنید.
+                </div>
+              )}
             </div>
           </div>
         </main>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { QueryProvider } from '../shared/providers/QueryProvider';
 
 export const metadata: Metadata = {
   title: 'هنرمندان | مرجع تخصصی هنرمندان کشور',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="antialiased bg-[#fdfbf7]">{children}</body>
+      <body className="antialiased bg-[#fdfbf7]">
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }

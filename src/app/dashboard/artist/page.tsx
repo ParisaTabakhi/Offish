@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { ProfilePage, useProfileData, useProfileEdit } from '../../../features/profile';
 import { useToast } from '../../../shared/hooks/use-toast';
 

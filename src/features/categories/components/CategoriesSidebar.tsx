@@ -1,13 +1,15 @@
-// src/features/categories/components/CategoriesSidebar.tsx
 'use client';
 
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Star, Music, Camera, Drama, Mic } from 'lucide-react';
 import { cn } from '../../../shared/lib/cn';
-import { ICategoriesSidebarProps, ICategory } from '../types/categories.types';
+import { ICategoriesSidebarProps } from '../types/categories.types';
 
 const categoryIcons: Record<string, any> = {
+  'Musical Acts': Music,
+  Entertainers: Drama,
+  'Event Services': Camera,
   Singer: Mic,
   Musician: Music,
   Photographer: Camera,
@@ -15,6 +17,9 @@ const categoryIcons: Record<string, any> = {
 };
 
 const categoryLabels: Record<string, string> = {
+  'Musical Acts': 'موسیقی',
+  Entertainers: 'هنرهای نمایشی',
+  'Event Services': 'خدمات',
   Singer: 'خواننده',
   Musician: 'نوازنده',
   Photographer: 'عکاس',
@@ -23,7 +28,7 @@ const categoryLabels: Record<string, string> = {
 
 const CategoriesSidebar: React.FC<ICategoriesSidebarProps> = ({
   categories,
-  selectedCategory,
+  selectedCategoryId,
   onCategorySelect,
   isOpen,
   onClose,
@@ -56,14 +61,15 @@ const CategoriesSidebar: React.FC<ICategoriesSidebarProps> = ({
               دسته‌بندی‌ها
             </p>
             {categories.map((category) => {
-              const Icon = categoryIcons[category.name];
-              const isActive = selectedCategory === category.name;
+              const Icon = categoryIcons[category.name] || Sparkles;
+              const label = categoryLabels[category.name] || category.name;
+              const isActive = selectedCategoryId === category.id;
 
               return (
                 <button
-                  key={category.name}
+                  key={category.id}
                   onClick={() => {
-                    onCategorySelect(category.name);
+                    onCategorySelect(category.id);
                     onClose();
                   }}
                   className={cn(
@@ -80,7 +86,7 @@ const CategoriesSidebar: React.FC<ICategoriesSidebarProps> = ({
                         isActive ? "text-white" : "text-gray-500 group-hover:text-[#2745d1]"
                       )}
                     />
-                    <span className="font-bold">{categoryLabels[category.name]}</span>
+                    <span className="font-bold">{label}</span>
                   </div>
                   {isActive && (
                     <motion.div
@@ -94,7 +100,7 @@ const CategoriesSidebar: React.FC<ICategoriesSidebarProps> = ({
                       isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-500"
                     )}
                   >
-                    {category.count}
+                    {category.count || 0}
                   </div>
                 </button>
               );

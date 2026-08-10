@@ -52,7 +52,7 @@ const MainLayout: React.FC<IMainLayoutProps> = ({
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

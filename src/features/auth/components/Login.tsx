@@ -1,26 +1,21 @@
 'use client';
 
-import React, { useState, memo } from 'react';
+import React, { memo } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Smartphone, Zap, LayoutGrid } from 'lucide-react';
+import { ArrowRight, Mail, Lock, Eye, EyeOff, Smartphone, Zap, LayoutGrid } from 'lucide-react';
 import { Input } from '../../../shared/ui/input';
 import { Label } from '../../../shared/ui/label';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../shared/ui/tabs';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { Tabs, TabsList, TabsTrigger } from '../../../shared/ui/tabs';
 import { getAuthTheme, LOGIN_MESSAGES } from '../constants/auth.constants';
 import { IAuthPageProps } from '../types/auth.types';
+import { useAuthForm } from '../hooks/useAuth';
 
 const Login: React.FC<IAuthPageProps> = ({ role }) => {
   const router = useRouter();
-  const { toast } = useToast();
-  const [showPassword, setShowPassword] = useState(false);
-  const [loginMethod, setLoginMethod] = useState('email');
-  const [isLoading, setIsLoading] = useState(false);
-
   const isArtist = role === 'artist';
   const theme = getAuthTheme(role);
-  const messages = LOGIN_MESSAGES[role] || LOGIN_MESSAGES.employer;
+  const messages = LOGIN_MESSAGES[role] || LOGIN_MESSAGES.planner;
   const Icon = isArtist ? Zap : LayoutGrid;
 
   const primaryColor = isArtist ? '#f97316' : '#2745d1';
@@ -28,26 +23,26 @@ const Login: React.FC<IAuthPageProps> = ({ role }) => {
     ? 'bg-gradient-to-br from-orange-500 to-amber-500'
     : 'bg-gradient-to-br from-[#2745d1] to-blue-600';
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: 'پیام سیستم',
-        description: 'این یک دموی نمایشی است. اتصال به سرور برقرار نیست.',
-      });
-    }, 1500);
-  };
-
-  const handleBack = () => {
-    router.push('/auth/role');
-  };
+  const {
+    showPassword,
+    setShowPassword,
+    loginMethod,
+    setLoginMethod,
+    isLoading,
+    handleSubmit,
+    handleBack,
+  } = useAuthForm({ role, type: 'login' });
 
   return (
     <div className="h-[100dvh] w-full flex bg-slate-50 overflow-hidden">
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 relative overflow-y-auto">
-        
+        <button
+          onClick={handleBack}
+          className="absolute top-3 right-8 text-slate-500 hover:text-slate-900 gap-2 hover:bg-slate-100 px-3 py-2 rounded-lg flex items-center transition-colors z-10"
+        >
+          <ArrowRight className="w-4 h-4" />
+          بازگشت
+        </button>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -56,13 +51,6 @@ const Login: React.FC<IAuthPageProps> = ({ role }) => {
           className="w-full max-w-md"
         >
           <div className="mb-10 text-center lg:text-right">
-            <button
-          onClick={handleBack}
-          className="absolute top-3 right-8 text-slate-500 hover:text-slate-900 gap-2 hover:bg-slate-100 px-3 py-2 rounded-lg flex items-center transition-colors z-10"
-        >
-          <ArrowRight className="w-4 h-4" />
-             بازگشت 
-          </button>
             <h1 className="text-3xl font-bold text-slate-900 mb-3">
               ورود به حساب{' '}
               <span style={{ color: primaryColor }}>
@@ -102,10 +90,12 @@ const Login: React.FC<IAuthPageProps> = ({ role }) => {
                       <Label className="text-slate-700 font-medium">آدرس ایمیل</Label>
                       <div className="relative">
                         <Input
+                          name="email"
                           type="email"
                           placeholder="example@domain.com"
                           className={`input-modern pr-10 ${theme.ringFocus}`}
                           dir="ltr"
+                          required
                         />
                         <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       </div>
@@ -115,10 +105,12 @@ const Login: React.FC<IAuthPageProps> = ({ role }) => {
                       <Label className="text-slate-700 font-medium">شماره موبایل</Label>
                       <div className="relative">
                         <Input
+                          name="mobileNumber"
                           type="tel"
                           placeholder="0912..."
                           className={`input-modern pr-10 ${theme.ringFocus}`}
                           dir="ltr"
+                          required
                         />
                         <Smartphone className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       </div>
@@ -136,10 +128,12 @@ const Login: React.FC<IAuthPageProps> = ({ role }) => {
                 </div>
                 <div className="relative">
                   <Input
+                    name="password"
                     type={showPassword ? 'text' : 'password'}
                     className={`input-modern px-10 ${theme.ringFocus}`}
                     placeholder="••••••••"
                     dir="ltr"
+                    required
                   />
                   <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                   <button
@@ -183,6 +177,7 @@ const Login: React.FC<IAuthPageProps> = ({ role }) => {
       <div
         className={`hidden lg:flex w-1/2 relative overflow-hidden ${bgGradient} p-12 items-center justify-center`}
       >
+        {/* محتوای بصری */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
         <div className="absolute top-10 right-10 w-32 h-32 border border-white/20 rounded-full" />
         <div className="absolute bottom-20 left-20 w-64 h-64 border border-white/10 rounded-full" />

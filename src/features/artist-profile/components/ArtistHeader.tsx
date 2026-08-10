@@ -1,4 +1,3 @@
-// src/features/artist-profile/components/ArtistHeader.tsx
 'use client';
 
 import React, { memo } from 'react';
@@ -9,6 +8,12 @@ import { Avatar, AvatarImage, AvatarFallback } from '../../../shared/ui/avatar';
 import { IArtistHeaderProps } from '../types/artist-profile.types';
 
 const ArtistHeader: React.FC<IArtistHeaderProps> = ({ artist }) => {
+  const initials = artist.name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -19,7 +24,7 @@ const ArtistHeader: React.FC<IArtistHeaderProps> = ({ artist }) => {
       {/* Cover Image */}
       <div className="w-full h-48 md:h-64 relative overflow-hidden group">
         <img
-          src={artist.coverImage}
+          src={artist.coverImage || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&h=400&fit=crop'}
           alt="Cover"
           className="w-full h-full object-cover"
         />
@@ -35,7 +40,7 @@ const ArtistHeader: React.FC<IArtistHeaderProps> = ({ artist }) => {
               <Avatar className="w-24 h-24 md:w-32 md:h-32 border-4 border-white">
                 <AvatarImage src={artist.profileImage} alt={artist.name} className="object-cover" />
                 <AvatarFallback className="text-2xl font-bold bg-[#2745d1] text-white">
-                  {artist.name.split(' ').map(n => n[0]).join('')}
+                  {initials}
                 </AvatarFallback>
               </Avatar>
             </div>

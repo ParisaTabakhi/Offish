@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { RequestsList } from '../../../../features/requests';
 import { IRequest, IRequestStats } from '../../../../features/requests/types/requests.types';
 import { useToast } from '../../../../shared/hooks/use-toast';
-import {mockEmployerRequests} from '../data'
+import {mockEmployerRequests} from '../../../(dashboard)/employer/data'
 
 
 export default function EmployerRequestsPage() {

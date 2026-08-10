@@ -1,4 +1,3 @@
-// src/features/artist-profile/components/ArtistProfilePage.tsx
 'use client';
 
 import React, { memo } from 'react';
@@ -45,28 +44,27 @@ const ArtistProfilePage: React.FC<IArtistProfilePageProps> = ({ artistId }) => {
       </main>
 
       {/* Mobile Sticky Action Bar */}
-
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 lg:hidden z-50 flex items-center gap-3">
-    <button 
-        onClick={() => {
-        const params = new URLSearchParams({
-            artistId: artist.id,
-            artistName: artist.name,
-            category: artist.category,
-        });
-        window.location.href = `/booking?${params.toString()}`;
-        }}
-        className="flex-1 bg-[#2745d1] text-white font-bold py-3 rounded-xl shadow-lg"
-    >
-        درخواست رزرو
-    </button>
-    <div className="flex flex-col items-end text-xs text-slate-600">
-        <span>شروع از</span>
-        <span className="font-bold text-slate-900">
-        {artist.pricing.hourlyRate}
-        </span>
-    </div>
-    </div>
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 lg:hidden z-50 flex items-center gap-3">
+        <button
+          onClick={() => {
+            const params = new URLSearchParams({
+              artistId: artist.id,
+              artistName: artist.name,
+              category: artist.category,
+            });
+            window.location.href = `/booking?${params.toString()}`;
+          }}
+          className="flex-1 bg-[#2745d1] text-white font-bold py-3 rounded-xl shadow-lg"
+        >
+          درخواست رزرو
+        </button>
+        <div className="flex flex-col items-end text-xs text-slate-600">
+          <span>شروع از</span>
+          <span className="font-bold text-slate-900">
+            {artist.pricing.hourlyRate}
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,16 +1,12 @@
-// src/app/artist/[id]/page.tsx
-'use client';
-
-import { useParams } from 'next/navigation';
 import ArtistProfilePage from '../../../features/artist-profile/components/ArtistProfilePage';
 
-export default function ArtistPage() {
-  const params = useParams();
-  const id = params?.id as string;
+interface IArtistPageProps {
+  params: {
+    id: string;
+  };
+}
 
-  if (!id) {
-    return <div>در حال بارگذاری...</div>;
-  }
-
-  return <ArtistProfilePage artistId={id} />;
+export default function ArtistPage({ params }: IArtistPageProps) {
+  console.log('📄 صفحه هنرمند با id:', params.id);
+  return <ArtistProfilePage artistId={params.id} />;
 }
