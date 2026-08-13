@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { artistService } from '../../services/artist/artist.service';
-import { IArtist } from '../../services/artist/artist.types';
-import { IArtistDetailResponse } from '../../../shared/services/artist/artist.types';
-
+import { IArtist, IArtistDetail } from '../../services/artist/artist.types';
 
 export const ARTIST_QUERY_KEYS = {
   all: ['artists'] as const,
@@ -22,15 +20,10 @@ export const useArtistsBySubcategory = (subcategoryId: string | undefined) => {
 };
 
 export const useArtistDetail = (id: string | undefined) => {
-  return useQuery<IArtistDetailResponse>({
+  return useQuery<IArtistDetail>({
     queryKey: ARTIST_QUERY_KEYS.detail(id || ''),
-    queryFn: async () => {
-      console.log('📡 درخواست به سرور برای هنرمند:', id);
-      const result = await artistService.getArtistById(id!);
-      console.log('📦 پاسخ دریافت شده:', result);
-      return result;
-    },
-    enabled: !!id,
+    queryFn: () => artistService.getArtistById(id!),
+    enabled: !!id && id !== 'undefined' && id !== 'null',
     staleTime: 5 * 60 * 1000,
     retry: 1,
   });

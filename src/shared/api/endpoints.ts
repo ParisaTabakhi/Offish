@@ -13,7 +13,7 @@ export const ENDPOINTS = {
 
  ARTISTS: {
     LIST: '/artists',
-    DETAIL: (id: string) => `/artists/${id}`,
+    DETAIL: (id: string) => `/ArtistQuery/${id}`,
     FEATURED: '/artists/featured',
     BY_SUBCATEGORY: (subcategoryId: string) =>
       `/ArtistQuery/by-category/${subcategoryId}`,

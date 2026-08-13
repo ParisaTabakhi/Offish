@@ -1,5 +1,4 @@
 // src/features/artist-profile/types/artist-profile.types.ts
-import { LucideIcon } from 'lucide-react';
 
 // ============================================
 // 1. PORTFOLIO

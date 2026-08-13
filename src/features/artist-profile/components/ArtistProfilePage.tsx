@@ -14,9 +14,33 @@ interface IArtistProfilePageProps {
 }
 
 const ArtistProfilePage: React.FC<IArtistProfilePageProps> = ({ artistId }) => {
-  const artist = useArtistData(artistId);
+  const { profile: artist, isLoading, isError } = useArtistData(artistId);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-[#2745d1] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-slate-500">در حال بارگذاری...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-500 text-lg font-bold">خطا در دریافت اطلاعات هنرمند</p>
+          <p className="text-slate-500 mt-2">لطفاً مجدداً تلاش کنید.</p>
+        </div>
+      </div>
+    );
+  }
+
 
   if (!artist) {
+    console.log('🚫 هنرمند پیدا نشد، نمایش 404');
     notFound();
   }
 

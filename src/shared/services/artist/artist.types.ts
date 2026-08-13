@@ -1,5 +1,9 @@
 import { IApiResponse } from '../../api/types';
 
+// ============================================
+// 1. ARTIST 
+// ============================================
+
 export interface IArtist {
   id: string;
   fullName: string;
@@ -18,7 +22,13 @@ export interface IArtist {
   operatesInOtherProvinces: boolean;
 }
 
-export interface IArtistDetailResponse {
+export type IArtistsBySubcategoryResponse = IApiResponse<IArtist[]> | IArtist[];
+
+// ============================================
+// 2. ARTIST DETAIL
+// ============================================
+
+export interface IArtistDetail {
   id: string;
   pictureProfileUrl: string | null;
   parentCategoryId: string;
@@ -36,5 +46,4 @@ export interface IArtistDetailResponse {
   operatesInOtherProvinces: boolean;
 }
 
-export type IArtistsBySubcategoryResponse = IApiResponse<IArtist[]> | IArtist[];
-export type IArtistDetailApiResponse = IApiResponse<IArtistDetailResponse> | IArtistDetailResponse;
+export type IArtistDetailResponse = IApiResponse<IArtistDetail> | IArtistDetail;

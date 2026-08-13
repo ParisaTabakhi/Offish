@@ -10,6 +10,8 @@ import { IPortfolioGalleryProps } from '../types/artist-profile.types';
 const PortfolioGallery: React.FC<IPortfolioGalleryProps> = ({ portfolio }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const hasImages = portfolio.images.length > 0;
+  const hasVideos = portfolio.videos.length > 0;
 
   const openLightbox = (url: string) => {
     setLightboxImage(url);
@@ -46,62 +48,74 @@ const PortfolioGallery: React.FC<IPortfolioGalleryProps> = ({ portfolio }) => {
         </TabsList>
 
         <TabsContent value="images" className="mt-0 focus-visible:outline-none">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {/* Main Featured Image */}
-            <div
-              className="col-span-2 row-span-2 relative aspect-square md:aspect-auto md:h-full rounded-xl overflow-hidden group cursor-pointer"
-              onClick={() => openLightbox(portfolio.images[0].url)}
-            >
-              <img
-                src={portfolio.images[0].url}
-                alt={portfolio.images[0].title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-            </div>
-
-            {/* Other Images */}
-            {portfolio.images.slice(1, 5).map((image) => (
+          {hasImages ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {/* Main Featured Image */}
               <div
-                key={image.id}
-                className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
-                onClick={() => openLightbox(image.url)}
+                className="col-span-2 row-span-2 relative aspect-square md:aspect-auto md:h-full rounded-xl overflow-hidden group cursor-pointer"
+                onClick={() => openLightbox(portfolio.images[0].url)}
               >
                 <img
-                  src={image.url}
-                  alt={image.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  src={portfolio.images[0].url}
+                  alt={portfolio.images[0].title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
               </div>
-            ))}
-          </div>
+
+              {/* Other Images */}
+              {portfolio.images.slice(1, 5).map((image) => (
+                <div
+                  key={image.id}
+                  className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
+                  onClick={() => openLightbox(image.url)}
+                >
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-slate-500 text-sm text-center py-10">
+              هنوز تصویری برای این هنرمند ثبت نشده است.
+            </p>
+          )}
         </TabsContent>
 
         <TabsContent value="videos" className="mt-0 focus-visible:outline-none">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {portfolio.videos.map((video) => (
-              <div
-                key={video.id}
-                className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-slate-100"
-              >
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center">
-                    <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+          {hasVideos ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {portfolio.videos.map((video) => (
+                <div
+                  key={video.id}
+                  className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-slate-100"
+                >
+                  <img
+                    src={video.thumbnail}
+                    alt={video.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                      <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-2 right-2 left-2 flex justify-between items-end text-white text-[10px]">
+                    <span className="font-medium truncate max-w-[70%]">{video.title}</span>
+                    <span className="bg-black/60 px-1.5 py-0.5 rounded">{video.duration}</span>
                   </div>
                 </div>
-                <div className="absolute bottom-2 right-2 left-2 flex justify-between items-end text-white text-[10px]">
-                  <span className="font-medium truncate max-w-[70%]">{video.title}</span>
-                  <span className="bg-black/60 px-1.5 py-0.5 rounded">{video.duration}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-slate-500 text-sm text-center py-10">
+              هنوز ویدیویی برای این هنرمند ثبت نشده است.
+            </p>
+          )}
         </TabsContent>
       </Tabs>
 
