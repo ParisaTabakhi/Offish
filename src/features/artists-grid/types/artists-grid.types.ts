@@ -1,16 +1,4 @@
-export interface IArtist {
-  id: number;
-  name: string;
-  category: string;
-  price: string;
-  description: string;
-  projects: number;
-  rating: number;
-  city: string;
-  isVerified: boolean;
-  image: string;
-  cover: string;
-}
+import { IArtist } from '../../../shared/services/artist/artist.types';
 
 export interface IArtistsGridProps {
   artists?: IArtist[];
