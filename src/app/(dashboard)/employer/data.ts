@@ -9,7 +9,10 @@ export const mockEmployerRequests: IRequest[] = [
     status: 'pending',
     createdAt: '2024-07-16T11:00:00Z',
     updatedAt: '2024-07-16T11:00:00Z',
-    budget: 12000000,
+    budget: {
+    min: 25000000,
+    max: 25000000,
+  },
     currency: 'تومان',
     category: 'عکاسی',
     artist: {
@@ -25,7 +28,10 @@ export const mockEmployerRequests: IRequest[] = [
     status: 'accepted',
     createdAt: '2024-07-14T15:30:00Z',
     updatedAt: '2024-07-15T10:00:00Z',
-    budget: 25000000,
+    budget: {
+    min: 25000000,
+    max: 25000000,
+  },
     currency: 'تومان',
     category: 'موسیقی',
     artist: {
@@ -42,7 +48,10 @@ export const mockEmployerRequests: IRequest[] = [
     status: 'completed',
     createdAt: '2024-07-10T09:00:00Z',
     updatedAt: '2024-07-20T17:00:00Z',
-    budget: 18000000,
+    budget: {
+  min: 25000000,
+  max: 25000000,
+},
     currency: 'تومان',
     category: 'طراحی لباس',
     artist: {
@@ -59,7 +68,10 @@ export const mockEmployerRequests: IRequest[] = [
     status: 'rejected',
     createdAt: '2024-07-13T08:20:00Z',
     updatedAt: '2024-07-14T14:00:00Z',
-    budget: 9000000,
+   budget: {
+  min: 25000000,
+  max: 25000000,
+},
     currency: 'تومان',
     category: 'سرگرمی',
     artist: {
@@ -75,7 +87,10 @@ export const mockEmployerRequests: IRequest[] = [
     status: 'pending',
     createdAt: '2024-07-16T13:45:00Z',
     updatedAt: '2024-07-16T13:45:00Z',
-    budget: 7000000,
+    budget: {
+  min: 25000000,
+  max: 25000000,
+},
     currency: 'تومان',
     category: 'تصویربرداری',
     artist: {
