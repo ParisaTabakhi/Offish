@@ -1,6 +1,6 @@
-import { IArtist } from '../types/artists-grid.types';
+import { IMockArtist } from '../types/artists-grid.types';
 
-export const artists: IArtist[] = [
+export const artists: IMockArtist[] = [
   {
     id: 1,
     name: 'سارا رادمنش',

@@ -5,7 +5,7 @@ import { IApiResponse } from '../../api/types';
 // ============================================
 
 export interface IArtist {
-  id: string;
+  id: string | number;
   fullName: string;
   nickname: string | null;
   category: string;

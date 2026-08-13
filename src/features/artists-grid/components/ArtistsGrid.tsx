@@ -55,7 +55,7 @@ const ArtistsGrid: React.FC<IArtistsGridProps> = ({
             {currentArtists.map((artist, index) => (
               <ArtistCard
                 key={`${artist.id}-${currentPage}`}
-                artist={artist}
+                artist={artist as any}
                 index={index}
               />
             ))}

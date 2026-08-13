@@ -1,7 +1,21 @@
-import { IArtist } from '../../../shared/services/artist/artist.types';
+import { IArtist as ApiArtist } from '../../../shared/services/artist/artist.types';
+
+export interface IMockArtist {
+  id: number;
+  name: string;
+  category: string;
+  price: string;
+  description: string;
+  projects: number;
+  rating: number;
+  city: string;
+  isVerified: boolean;
+  image: string;
+  cover: string;
+}
 
 export interface IArtistsGridProps {
-  artists?: IArtist[];
+  artists?: ApiArtist[];
   itemsPerPage?: number;
 }
 
